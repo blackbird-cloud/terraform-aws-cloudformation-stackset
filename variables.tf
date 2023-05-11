@@ -28,14 +28,7 @@ variable "capabilities" {
 }
 
 variable "operation_preferences" {
-  type = object({
-    failure_tolerance_count      = number,
-    failure_tolerance_percentage = number,
-    max_concurrent_count         = number,
-    max_concurrent_percentage    = number,
-    region_concurrency_type      = number,
-    region_order                 = list(string),
-  })
+  type = any
   default = {
     failure_tolerance_count      = null
     failure_tolerance_percentage = null
@@ -44,7 +37,7 @@ variable "operation_preferences" {
     region_concurrency_type      = null
     region_order                 = null
   }
-  description = "(Optional) Whether or not auto-deployment is enabled."
+  description = "(Optional) Option to configure failure_tolerance_count, failure_tolerance_percentage, max_concurrent_count, max_concurrent_percentage, region_concurrency_type, and a list of region_order."
 }
 
 variable "description" {
