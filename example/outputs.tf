@@ -1,9 +1,9 @@
 output "stackset" {
-  value       = aws_cloudformation_stack_set.default
+  value       = module.stackset.stackset
   description = "The AWS Cloudformation StackSet."
 }
 
 output "stackset_instance" {
-  value       = try(aws_cloudformation_stack_set_instance.default[0], null)
+  value       = module.stackset.stackset_instance
   description = "The AWS Cloudformation StackSet Instance."
 }
