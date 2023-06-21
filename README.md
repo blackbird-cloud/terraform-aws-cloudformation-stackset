@@ -1,3 +1,4 @@
+<!-- BEGIN_TF_DOCS -->
 # AWS Cloudformation Stack Sets Terraform module
 A Terraform module which creates a Cloudformation Stack Set, and Stack Set Instance. Read [this](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html) page for more information.
 
@@ -53,7 +54,7 @@ module "stackset" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.66.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4 |
 
 ## Resources
 
@@ -102,3 +103,4 @@ Checkout our other :point\_right: [terraform modules](https://registry.terraform
 ## Copyright
 
 Copyright © 2017-2023 [Blackbird Cloud](https://www.blackbird.cloud)
+<!-- END_TF_DOCS -->
