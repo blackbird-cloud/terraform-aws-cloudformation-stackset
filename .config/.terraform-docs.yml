@@ -2,3 +2,36 @@ formatter: "markdown"
 
 header-from: ./.config/header.md
 footer-from: ./.config/footer.md
+
+output:
+  file: ./README.md
+  mode: replace
+  template: |-
+    {{ .Content }}
+
+sections:
+  hide:
+    - modules
+
+content: |-
+  # AWS Cloudformation Stack Sets Terraform module
+  A Terraform module which creates a Cloudformation Stack Set, and Stack Set Instance. Read [this](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html) page for more information.
+
+  {{ .Header }}
+
+  ## Example
+  ```hcl
+  {{ include "./example/main.tf" }}
+  ```
+
+  {{ .Requirements }}
+
+  {{ .Providers }}
+
+  {{ .Resources }}
+
+  {{ .Inputs }}
+
+  {{ .Outputs }}
+
+  {{ .Footer }}

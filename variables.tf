@@ -118,7 +118,8 @@ variable "stackset_instance_retain_stack" {
 }
 
 variable "stackset_instance_organizational_unit_ids" {
-  type = list(string)
+  type        = list(string)
   description = "The organization root ID or organizational unit (OU) IDs to which StackSets instance deploys."
+  default     = null
 }
 

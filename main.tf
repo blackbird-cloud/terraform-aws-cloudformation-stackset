@@ -12,9 +12,12 @@ resource "aws_cloudformation_stack_set" "default" {
   capabilities = var.capabilities
   parameters   = var.parameters
 
-  auto_deployment {
-    enabled                          = var.auto_deployment.enabled
-    retain_stacks_on_account_removal = var.auto_deployment.retain_stacks_on_account_removal
+  dynamic "auto_deployment" {
+    for_each = var.auto_deployment.enabled ? [1] : []
+    content {
+      retain_stacks_on_account_removal = var.auto_deployment.retain_stacks_on_account_removal
+      enabled                          = var.auto_deployment.enabled
+    }
   }
 
   operation_preferences {
@@ -33,8 +36,12 @@ resource "aws_cloudformation_stack_set" "default" {
 resource "aws_cloudformation_stack_set_instance" "default" {
   count = var.create_instance == true ? 1 : 0
 
-  deployment_targets {
-    organizational_unit_ids = var.stackset_instance_organizational_unit_ids
+  dynamic "deployment_targets" {
+    for_each = var.stackset_instance_organizational_unit_ids != null ? [1] : []
+
+    content {
+      organizational_unit_ids = var.stackset_instance_organizational_unit_ids
+    }
   }
 
   retain_stack   = var.stackset_instance_retain_stack

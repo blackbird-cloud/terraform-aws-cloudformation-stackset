@@ -1,4 +1,46 @@
-[![blackbird-logo](https://raw.githubusercontent.com/blackbird-cloud/terraform-module-template/main/.config/logo_simple.png)](https://blackbird.cloud)
+# AWS Cloudformation Stack Sets Terraform module
+A Terraform module which creates a Cloudformation Stack Set, and Stack Set Instance. Read [this](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html) page for more information.
+
+[![blackbird-logo](https://raw.githubusercontent.com/blackbird-cloud/terraform-module-template/main/.config/logo_simple.png)](https://www.blackbird.cloud)
+
+## Example
+```hcl
+module "account_info" {
+  source  = "blackbird-cloud/account-info/aws"
+  version = "~> 1"
+}
+
+module "stackset" {
+  source  = "blackbird-cloud/cloudformation-stackset/aws"
+  version = "~> 1"
+
+  name         = "AWSCloudFormationStackSetExecutionRole"
+  template_url = "https://s3.amazonaws.com/cloudformation-stackset-sample-templates-us-east-1/AWSCloudFormationStackSetExecutionRole.yml"
+  description  = "Cloudformation account execution role."
+
+  parameters = {
+    AdministratorAccountId = module.account_info.account_id
+  }
+
+  auto_deployment = {
+    enabled                          = true
+    retain_stacks_on_account_removal = false
+  }
+
+  capabilities = ["CAPABILITY_NAMED_IAM"]
+
+  operation_preferences = {
+    max_concurrent_count    = 10
+    failure_tolerance_count = 9
+    region_concurrency_type = "PARALLEL"
+  }
+
+  permission_model = "SERVICE_MANAGED"
+  stackset_instance_organizational_unit_ids = [
+    "r-12345"
+  ]
+}
+```
 
 ## Requirements
 
@@ -12,10 +54,6 @@
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.66.1 |
-
-## Modules
-
-No modules.
 
 ## Resources
 
@@ -41,7 +79,7 @@ No modules.
 | <a name="input_permission_model"></a> [permission\_model](#input\_permission\_model) | (Optional) Describes how the IAM roles required for your StackSet are created. Valid values: SELF\_MANAGED (default), SERVICE\_MANAGED. | `string` | `"SELF_MANAGED"` | no |
 | <a name="input_stackset_instance_account_id"></a> [stackset\_instance\_account\_id](#input\_stackset\_instance\_account\_id) | (Optional) Target AWS Account ID to create a Stack based on the StackSet. Defaults to current account. | `string` | `null` | no |
 | <a name="input_stackset_instance_call_as"></a> [stackset\_instance\_call\_as](#input\_stackset\_instance\_call\_as) | (Optional) Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. Valid values: SELF (default), DELEGATED\_ADMIN. | `string` | `"SELF"` | no |
-| <a name="input_stackset_instance_organizational_unit_ids"></a> [stackset\_instance\_organizational\_unit\_ids](#input\_stackset\_instance\_organizational\_unit\_ids) | The organization root ID or organizational unit (OU) IDs to which StackSets instance deploys. | `list(string)` | n/a | yes |
+| <a name="input_stackset_instance_organizational_unit_ids"></a> [stackset\_instance\_organizational\_unit\_ids](#input\_stackset\_instance\_organizational\_unit\_ids) | The organization root ID or organizational unit (OU) IDs to which StackSets instance deploys. | `list(string)` | `null` | no |
 | <a name="input_stackset_instance_region"></a> [stackset\_instance\_region](#input\_stackset\_instance\_region) | (Optional) Target AWS Region to create a Stack based on the StackSet. Defaults to current region. | `string` | `null` | no |
 | <a name="input_stackset_instance_retain_stack"></a> [stackset\_instance\_retain\_stack](#input\_stackset\_instance\_retain\_stack) | (Optional) During Terraform resource destroy, remove Instance from StackSet while keeping the Stack and its associated resources. Must be enabled in Terraform state before destroy operation to take effect. You cannot reassociate a retained Stack or add an existing, saved Stack to a new StackSet. Defaults to false. | `bool` | `false` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | (Optional) Key-value map of tags to associate with this StackSet and the Stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the Stacks. A maximum number of 50 tags can be specified. If configured with a provider default\_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level. | `map(string)` | `{}` | no |
@@ -63,4 +101,4 @@ Checkout our other :point\_right: [terraform modules](https://registry.terraform
 
 ## Copyright
 
-Copyright © 2017-2023 [Blackbird Cloud](https://blackbird.cloud)
+Copyright © 2017-2023 [Blackbird Cloud](https://www.blackbird.cloud)
