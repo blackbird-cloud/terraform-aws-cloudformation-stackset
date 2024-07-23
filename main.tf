@@ -34,22 +34,24 @@ resource "aws_cloudformation_stack_set" "default" {
 }
 
 resource "aws_cloudformation_stack_set_instance" "default" {
-  count = var.create_instance == true ? 1 : 0
+  count = var.create_instance == true && length(var.stackset_instance_organizational_unit_ids) > 0 ? 1 : 0
 
-  dynamic "deployment_targets" {
-    for_each = var.stackset_instance_organizational_unit_ids != null ? [1] : []
-
-    content {
-      organizational_unit_ids = var.stackset_instance_organizational_unit_ids
-    }
+  deployment_targets {
+    organizational_unit_ids = var.stackset_instance_organizational_unit_ids
   }
 
-  dynamic "deployment_targets" {
-    for_each = var.stackset_instance_accounts != null ? [1] : []
+  retain_stack   = var.stackset_instance_retain_stack
+  call_as        = var.stackset_instance_call_as
+  region         = var.stackset_instance_region
+  account_id     = var.stackset_instance_account_id
+  stack_set_name = aws_cloudformation_stack_set.default.name
+}
 
-    content {
-      accounts = var.stackset_instance_accounts
-    }
+resource "aws_cloudformation_stack_set_instance" "accounts" {
+  count = var.create_instance == true && length(var.stackset_instance_accounts) > 0 ? 1 : 0
+
+  deployment_targets {
+    accounts = var.stackset_instance_accounts
   }
 
   retain_stack   = var.stackset_instance_retain_stack
