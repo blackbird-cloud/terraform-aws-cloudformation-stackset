@@ -123,3 +123,8 @@ variable "stackset_instance_organizational_unit_ids" {
   default     = null
 }
 
+variable "stackset_instance_accounts" {
+  type        = list(string)
+  description = "The list of AWS Account IDs to which StackSets instance deploys."
+  default     = null
+}

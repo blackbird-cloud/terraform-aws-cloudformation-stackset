@@ -44,6 +44,14 @@ resource "aws_cloudformation_stack_set_instance" "default" {
     }
   }
 
+  dynamic "deployment_targets" {
+    for_each = var.stackset_instance_accounts != null ? [1] : []
+
+    content {
+      accounts = var.stackset_instance_accounts
+    }
+  }
+
   retain_stack   = var.stackset_instance_retain_stack
   call_as        = var.stackset_instance_call_as
   region         = var.stackset_instance_region
