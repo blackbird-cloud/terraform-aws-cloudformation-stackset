@@ -1,8 +1,8 @@
 <!-- BEGIN_TF_DOCS -->
-# AWS Cloudformation Stack Sets Terraform module
-A Terraform module which creates a Cloudformation Stack Set, and Stack Set Instance. Read [this](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html) page for more information.
+# Terraform Aws Cloudformation Stackset Module
+Terraform module to create an AWS CloudFormation StackSet
 
-[![blackbird-logo](https://raw.githubusercontent.com/blackbird-cloud/terraform-module-template/main/.config/logo_simple.png)](https://www.blackbird.cloud)
+[![blackbird-logo](https://raw.githubusercontent.com/blackbird-cloud/terraform-module-template/main/.config/logo_simple.png)](https://blackbird.cloud)
 
 ## Example
 ```hcl
@@ -48,19 +48,20 @@ module "stackset" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 4 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
 | [aws_cloudformation_stack_set.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack_set) | resource |
+| [aws_cloudformation_stack_set_instance.accounts](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack_set_instance) | resource |
 | [aws_cloudformation_stack_set_instance.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack_set_instance) | resource |
 
 ## Inputs
@@ -79,6 +80,7 @@ module "stackset" {
 | <a name="input_parameters"></a> [parameters](#input\_parameters) | Key-value map of input parameters for the StackSet template. All template parameters, including those with a Default, must be configured or ignored with lifecycle configuration block ignore\_changes argument. All NoEcho template parameters must be ignored with the lifecycle configuration block ignore\_changes argument. | `map(string)` | `{}` | no |
 | <a name="input_permission_model"></a> [permission\_model](#input\_permission\_model) | (Optional) Describes how the IAM roles required for your StackSet are created. Valid values: SELF\_MANAGED (default), SERVICE\_MANAGED. | `string` | `"SELF_MANAGED"` | no |
 | <a name="input_stackset_instance_account_id"></a> [stackset\_instance\_account\_id](#input\_stackset\_instance\_account\_id) | (Optional) Target AWS Account ID to create a Stack based on the StackSet. Defaults to current account. | `string` | `null` | no |
+| <a name="input_stackset_instance_accounts"></a> [stackset\_instance\_accounts](#input\_stackset\_instance\_accounts) | The list of AWS Account IDs to which StackSets instance deploys. | `list(string)` | `null` | no |
 | <a name="input_stackset_instance_call_as"></a> [stackset\_instance\_call\_as](#input\_stackset\_instance\_call\_as) | (Optional) Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. Valid values: SELF (default), DELEGATED\_ADMIN. | `string` | `"SELF"` | no |
 | <a name="input_stackset_instance_organizational_unit_ids"></a> [stackset\_instance\_organizational\_unit\_ids](#input\_stackset\_instance\_organizational\_unit\_ids) | The organization root ID or organizational unit (OU) IDs to which StackSets instance deploys. | `list(string)` | `null` | no |
 | <a name="input_stackset_instance_region"></a> [stackset\_instance\_region](#input\_stackset\_instance\_region) | (Optional) Target AWS Region to create a Stack based on the StackSet. Defaults to current region. | `string` | `null` | no |
@@ -102,5 +104,5 @@ Checkout our other :point\_right: [terraform modules](https://registry.terraform
 
 ## Copyright
 
-Copyright © 2017-2023 [Blackbird Cloud](https://www.blackbird.cloud)
+Copyright © 2017-2024 [Blackbird Cloud](https://blackbird.cloud)
 <!-- END_TF_DOCS -->
