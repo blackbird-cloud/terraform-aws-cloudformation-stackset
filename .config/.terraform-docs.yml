@@ -14,8 +14,7 @@ sections:
     - modules
 
 content: |-
-  # AWS Cloudformation Stack Sets Terraform module
-  A Terraform module which creates a Cloudformation Stack Set, and Stack Set Instance. Read [this](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html) page for more information.
+  {{ include "./.config/title.md"}}
 
   {{ .Header }}
 
