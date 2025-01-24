@@ -1,3 +1,4 @@
+<!-- BEGIN_TF_DOCS -->
 # Terraform Aws Cloudformation Stackset Module
 Terraform module to create an AWS CloudFormation StackSet
 
@@ -55,7 +56,7 @@ module "stackset" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.84.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.60 |
 
 ## Resources
 
@@ -70,14 +71,14 @@ module "stackset" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_administration_role_arn"></a> [administration\_role\_arn](#input\_administration\_role\_arn) | (Optional) Amazon Resource Number (ARN) of the IAM Role in the administrator account. This must be defined when using the SELF\_MANAGED permission model. | `string` | `null` | no |
-| <a name="input_auto_deployment"></a> [auto\_deployment](#input\_auto\_deployment) | (Optional) Whether or not auto-deployment is enabled. | <pre>object({<br>    enabled                          = bool,<br>    retain_stacks_on_account_removal = bool<br>  })</pre> | <pre>{<br>  "enabled": false,<br>  "retain_stacks_on_account_removal": false<br>}</pre> | no |
+| <a name="input_auto_deployment"></a> [auto\_deployment](#input\_auto\_deployment) | (Optional) Whether or not auto-deployment is enabled. | <pre>object({<br/>    enabled                          = bool,<br/>    retain_stacks_on_account_removal = bool<br/>  })</pre> | <pre>{<br/>  "enabled": false,<br/>  "retain_stacks_on_account_removal": false<br/>}</pre> | no |
 | <a name="input_call_as"></a> [call\_as](#input\_call\_as) | (Optional) Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. Valid values: SELF (default), DELEGATED\_ADMIN. | `string` | `"SELF"` | no |
 | <a name="input_capabilities"></a> [capabilities](#input\_capabilities) | (Optional) A list of capabilities. Valid values: CAPABILITY\_IAM, CAPABILITY\_NAMED\_IAM, CAPABILITY\_AUTO\_EXPAND | `list(string)` | `[]` | no |
 | <a name="input_create_instance"></a> [create\_instance](#input\_create\_instance) | (Optional) Whether to create a stackset instance. Defaults to true. | `bool` | `true` | no |
 | <a name="input_description"></a> [description](#input\_description) | Description of the StackSet. | `string` | n/a | yes |
 | <a name="input_execution_role_name"></a> [execution\_role\_name](#input\_execution\_role\_name) | (Optional) Name of the IAM Role in all target accounts for StackSet operations. Defaults to AWSCloudFormationStackSetExecutionRole when using the SELF\_MANAGED permission model. This should not be defined when using the SERVICE\_MANAGED permission model. | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of the StackSet. The name must be unique in the region where you create your StackSet. The name can contain only alphanumeric characters (case-sensitive) and hyphens. It must start with an alphabetic character and cannot be longer than 128 characters. | `string` | n/a | yes |
-| <a name="input_operation_preferences"></a> [operation\_preferences](#input\_operation\_preferences) | (Optional) Option to configure failure\_tolerance\_count, failure\_tolerance\_percentage, max\_concurrent\_count, max\_concurrent\_percentage, region\_concurrency\_type, concurrency\_mode, and a list of region\_order. | `any` | <pre>{<br>  "concurrency_mode": null,<br>  "failure_tolerance_count": null,<br>  "failure_tolerance_percentage": null,<br>  "max_concurrent_count": null,<br>  "max_concurrent_percentage": null,<br>  "region_concurrency_type": null,<br>  "region_order": null<br>}</pre> | no |
+| <a name="input_operation_preferences"></a> [operation\_preferences](#input\_operation\_preferences) | (Optional) Option to configure failure\_tolerance\_count, failure\_tolerance\_percentage, max\_concurrent\_count, max\_concurrent\_percentage, region\_concurrency\_type, concurrency\_mode, and a list of region\_order. | `any` | <pre>{<br/>  "concurrency_mode": null,<br/>  "failure_tolerance_count": null,<br/>  "failure_tolerance_percentage": null,<br/>  "max_concurrent_count": null,<br/>  "max_concurrent_percentage": null,<br/>  "region_concurrency_type": null,<br/>  "region_order": null<br/>}</pre> | no |
 | <a name="input_parameters"></a> [parameters](#input\_parameters) | Key-value map of input parameters for the StackSet template. All template parameters, including those with a Default, must be configured or ignored with lifecycle configuration block ignore\_changes argument. All NoEcho template parameters must be ignored with the lifecycle configuration block ignore\_changes argument. | `map(string)` | `{}` | no |
 | <a name="input_permission_model"></a> [permission\_model](#input\_permission\_model) | (Optional) Describes how the IAM roles required for your StackSet are created. Valid values: SELF\_MANAGED (default), SERVICE\_MANAGED. | `string` | `"SELF_MANAGED"` | no |
 | <a name="input_stackset_instance_account_id"></a> [stackset\_instance\_account\_id](#input\_stackset\_instance\_account\_id) | (Optional) Target AWS Account ID to create a Stack based on the StackSet. Defaults to current account. | `string` | `null` | no |
@@ -106,3 +107,4 @@ Checkout our other :point\_right: [terraform modules](https://registry.terraform
 ## Copyright
 
 Copyright © 2017-2024 [Blackbird Cloud](https://blackbird.cloud)
+<!-- END_TF_DOCS -->
