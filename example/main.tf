@@ -1,6 +1,6 @@
 module "account_info" {
   source  = "blackbird-cloud/account-info/aws"
-  version = "~> 1"
+  version = "~> 2"
 }
 
 module "stackset" {
@@ -26,10 +26,12 @@ module "stackset" {
     max_concurrent_count    = 10
     failure_tolerance_count = 9
     region_concurrency_type = "PARALLEL"
+    concurrency_mode        = "SOFT_FAILURE_TOLERANCE"
   }
 
   permission_model = "SERVICE_MANAGED"
   stackset_instance_organizational_unit_ids = [
     "r-12345"
   ]
+  stackset_instance_accounts = []
 }

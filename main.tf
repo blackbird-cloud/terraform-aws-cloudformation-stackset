@@ -40,6 +40,16 @@ resource "aws_cloudformation_stack_set_instance" "default" {
     organizational_unit_ids = var.stackset_instance_organizational_unit_ids
   }
 
+  operation_preferences {
+    failure_tolerance_count      = try(var.operation_preferences.failure_tolerance_count, null)
+    failure_tolerance_percentage = try(var.operation_preferences.failure_tolerance_percentage, null)
+    max_concurrent_count         = try(var.operation_preferences.max_concurrent_count, null)
+    max_concurrent_percentage    = try(var.operation_preferences.max_concurrent_percentage, null)
+    concurrency_mode             = try(var.operation_preferences.concurrency_mode, null)
+    region_concurrency_type      = try(var.operation_preferences.region_concurrency_type, null)
+    region_order                 = try(var.operation_preferences.region_order, null)
+  }
+
   retain_stack   = var.stackset_instance_retain_stack
   call_as        = var.stackset_instance_call_as
   region         = var.stackset_instance_region
@@ -52,6 +62,16 @@ resource "aws_cloudformation_stack_set_instance" "accounts" {
 
   deployment_targets {
     accounts = var.stackset_instance_accounts
+  }
+
+  operation_preferences {
+    failure_tolerance_count      = try(var.operation_preferences.failure_tolerance_count, null)
+    failure_tolerance_percentage = try(var.operation_preferences.failure_tolerance_percentage, null)
+    max_concurrent_count         = try(var.operation_preferences.max_concurrent_count, null)
+    max_concurrent_percentage    = try(var.operation_preferences.max_concurrent_percentage, null)
+    concurrency_mode             = try(var.operation_preferences.concurrency_mode, null)
+    region_concurrency_type      = try(var.operation_preferences.region_concurrency_type, null)
+    region_order                 = try(var.operation_preferences.region_order, null)
   }
 
   retain_stack   = var.stackset_instance_retain_stack

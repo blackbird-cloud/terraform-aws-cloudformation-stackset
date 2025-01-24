@@ -34,10 +34,11 @@ variable "operation_preferences" {
     failure_tolerance_percentage = null
     max_concurrent_count         = null
     max_concurrent_percentage    = null
+    concurrency_mode             = null
     region_concurrency_type      = null
     region_order                 = null
   }
-  description = "(Optional) Option to configure failure_tolerance_count, failure_tolerance_percentage, max_concurrent_count, max_concurrent_percentage, region_concurrency_type, and a list of region_order."
+  description = "(Optional) Option to configure failure_tolerance_count, failure_tolerance_percentage, max_concurrent_count, max_concurrent_percentage, region_concurrency_type, concurrency_mode, and a list of region_order."
 }
 
 variable "description" {
@@ -126,5 +127,5 @@ variable "stackset_instance_organizational_unit_ids" {
 variable "stackset_instance_accounts" {
   type        = list(string)
   description = "The list of AWS Account IDs to which StackSets instance deploys."
-  default     = null
+  default     = []
 }
