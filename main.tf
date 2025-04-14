@@ -31,6 +31,10 @@ resource "aws_cloudformation_stack_set" "default" {
 
   template_body = var.template_body
   template_url  = var.template_url
+
+  lifecycle {
+    ignore_changes = var.stack_set_ignore_changes
+  }
 }
 
 resource "aws_cloudformation_stack_set_instance" "default" {
