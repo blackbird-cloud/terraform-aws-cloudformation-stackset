@@ -129,9 +129,3 @@ variable "stackset_instance_accounts" {
   description = "The list of AWS Account IDs to which StackSets instance deploys."
   default     = []
 }
-
-variable "stack_set_ignore_changes" {
-  type        = list(string)
-  description = "(Optional) A list of attributes to ignore changes to. This is useful for attributes that are managed outside of Terraform, such as the administration_role_arn."
-  default     = [administration_role_arn]
-}
