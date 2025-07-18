@@ -65,7 +65,7 @@ module "stackset" {
 | [aws_cloudformation_stack_set.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack_set) | resource |
 | [aws_cloudformation_stack_set.self_managed](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack_set) | resource |
 | [aws_cloudformation_stack_set_instance.accounts](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack_set_instance) | resource |
-| [aws_cloudformation_stack_set_instance.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack_set_instance) | resource |
+| [aws_cloudformation_stack_set_instance.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack_set_instance) | resource |
 
 ## Inputs
 
@@ -97,7 +97,7 @@ module "stackset" {
 | Name | Description |
 |------|-------------|
 | <a name="output_stackset"></a> [stackset](#output\_stackset) | The AWS Cloudformation StackSet. |
-| <a name="output_stackset_instance"></a> [stackset\_instance](#output\_stackset\_instance) | The AWS Cloudformation StackSet Instance. |
+| <a name="output_stackset_instances"></a> [stackset\_instances](#output\_stackset\_instances) | All AWS CloudFormation StackSet instances created (keyed by OU ID). |
 
 ## About
 

@@ -84,11 +84,11 @@ resource "aws_cloudformation_stack_set" "self_managed" {
   }
 }
 
-resource "aws_cloudformation_stack_set_instance" "default" {
-  count = var.create_instance == true && length(var.stackset_instance_organizational_unit_ids) > 0 ? 1 : 0
+resource "aws_cloudformation_stack_set_instance" "this" {
+  for_each = var.create_instance && length(var.stackset_instance_organizational_unit_ids) > 0 ? toset(var.stackset_instance_organizational_unit_ids) : toset([])
 
   deployment_targets {
-    organizational_unit_ids = var.stackset_instance_organizational_unit_ids
+    organizational_unit_ids = [each.key]
   }
 
   operation_preferences {
