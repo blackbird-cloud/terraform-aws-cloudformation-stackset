@@ -85,38 +85,10 @@ resource "aws_cloudformation_stack_set" "self_managed" {
 }
 
 resource "aws_cloudformation_stack_set_instance" "this" {
-  for_each = var.create_instance && length(var.stackset_instance_organizational_unit_ids) > 0 ? toset(var.stackset_instance_organizational_unit_ids) : toset([])
-
   deployment_targets {
-    organizational_unit_ids = [each.key]
-  }
-
-  operation_preferences {
-    failure_tolerance_count      = try(var.operation_preferences.failure_tolerance_count, null)
-    failure_tolerance_percentage = try(var.operation_preferences.failure_tolerance_percentage, null)
-    max_concurrent_count         = try(var.operation_preferences.max_concurrent_count, null)
-    max_concurrent_percentage    = try(var.operation_preferences.max_concurrent_percentage, null)
-    concurrency_mode             = try(var.operation_preferences.concurrency_mode, null)
-    region_concurrency_type      = try(var.operation_preferences.region_concurrency_type, null)
-    region_order                 = try(var.operation_preferences.region_order, null)
-  }
-
-  retain_stack = var.stackset_instance_retain_stack
-  call_as      = var.stackset_instance_call_as
-  region       = var.stackset_instance_region
-  account_id   = var.stackset_instance_account_id
-  stack_set_name = (
-    var.permission_model == "SERVICE_MANAGED"
-    ? aws_cloudformation_stack_set.default[0].name
-    : aws_cloudformation_stack_set.self_managed[0].name
-  )
-}
-
-resource "aws_cloudformation_stack_set_instance" "accounts" {
-  count = var.create_instance == true && length(var.stackset_instance_accounts) > 0 ? 1 : 0
-
-  deployment_targets {
+    organizational_unit_ids = var.stackset_instance_organizational_unit_ids
     accounts = var.stackset_instance_accounts
+    account_filter_type = try(var.stackset_instance_account_filter_type, null)
   }
 
   operation_preferences {

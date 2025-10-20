@@ -129,3 +129,8 @@ variable "stackset_instance_accounts" {
   description = "The list of AWS Account IDs to which StackSets instance deploys."
   default     = []
 }
+variable "stackset_instance_account_filter_type" {
+  type        = string
+  description = "(Optional) The filter type to use when specifying accounts for StackSets instance deploys. Valid values: NONE, INTERSECTION, DIFFERENCE, UNION."
+  default     = null
+}
