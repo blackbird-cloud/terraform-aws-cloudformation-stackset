@@ -1,0 +1,22 @@
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    if: github.event.pull_request.state == 'open'
+    runs-on: ubuntu-latest
+    container: blackbirdcloud/terraform-toolkit:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Terraform test
+        env:
+          TFENV_TERRAFORM_VERSION: latest-allowed
+        run: |
+          terraform init -backend=false
+          terraform test
